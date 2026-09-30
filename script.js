@@ -123,12 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const openCart = () => {
         cartOverlay.classList.add('active');
         cartDrawer.classList.add('active');
+        document.body.style.overflow = 'hidden';
         renderCart();
     };
 
     const closeCart = () => {
         cartOverlay.classList.remove('active');
         cartDrawer.classList.remove('active');
+        document.body.style.overflow = '';
     };
 
     if(openCartBtn) openCartBtn.addEventListener('click', openCart);
@@ -282,4 +284,58 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // --- 5. Mobile Navigation Menu Toggle ---
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+    const mainHeader = document.getElementById('main-header');
+    const mainNav = document.getElementById('main-nav');
+    const menuToggleIcon = document.getElementById('menu-toggle-icon');
+
+    function toggleMobileNav(forceClose = false) {
+        if (!mainNav) return;
+        const isOpen = forceClose ? false : !mainNav.classList.contains('mobile-active');
+        
+        if (isOpen) {
+            mainNav.classList.add('mobile-active');
+            if (mobileNavOverlay) mobileNavOverlay.classList.add('active');
+            if (mainHeader) mainHeader.classList.add('nav-open');
+            if (menuToggleIcon) {
+                menuToggleIcon.classList.remove('ph-list');
+                menuToggleIcon.classList.add('ph-x');
+            }
+            document.body.style.overflow = 'hidden';
+        } else {
+            mainNav.classList.remove('mobile-active');
+            if (mobileNavOverlay) mobileNavOverlay.classList.remove('active');
+            if (mainHeader) mainHeader.classList.remove('nav-open');
+            if (menuToggleIcon) {
+                menuToggleIcon.classList.remove('ph-x');
+                menuToggleIcon.classList.add('ph-list');
+            }
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMobileNav();
+        });
+    }
+
+    if (mobileNavOverlay) {
+        mobileNavOverlay.addEventListener('click', () => {
+            toggleMobileNav(true);
+        });
+    }
+
+    if (mainNav) {
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileNav(true);
+            });
+        });
+    }
 });
