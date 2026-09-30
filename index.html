@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECO-SHELL | Sustainable Coconut Products</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Floating Pill Navbar -->
+    <header id="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="ph-fill ph-target logo-icon"></i>
+                <span class="logo-text">ECO-SHELL</span>
+            </a>
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#collection">Products</a></li>
+                    <li><a href="#process">How We Make It</a></li>
+                    <li><a href="#sustainability">Sustainability</a></li>
+                    <li><a href="#how-to-shop">How to Shop</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="admin.html" style="color: var(--primary-green); font-weight: 600;">Add Product</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <button aria-label="Cart" class="icon-btn cart-btn" id="open-cart-btn">
+                    <i class="ph ph-shopping-bag"></i>
+                    <span class="cart-badge" id="cart-badge-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-text">
+                <span class="eyebrow">NATURALLY RENEWED KITCHENWARE & ACCESSORIES</span>
+                <h1 class="hero-title">From agricultural waste to everyday kitchenware and fashion accessories.</h1>
+                <p class="hero-copy">Eco-Shell gives discarded coconut shells a second life by transforming them into useful, reusable, attractive kitchenware and fashion accessories.</p>
+                <div class="hero-buttons">
+                    <a href="#collection" class="btn btn-primary">Shop Now</a>
+                    <a href="#about" class="btn btn-outline-grey">Our story</a>
+                </div>
+                
+                <div class="hero-note-wrapper">
+                    <div class="hero-note-line"></div>
+                    <p class="hero-note">Thoughtful products, less waste, and everyday use — shaped around the natural character of every shell.</p>
+                </div>
+            </div>
+            
+            <div class="hero-image-wrapper">
+                <div class="hero-shape-orange"></div>
+                <img src="hero_banner_1790782244955.jpg" alt="Coconut shells" class="hero-img-arch">
+                
+                <!-- Floating Overlapping Card -->
+                <div class="hero-floating-card">
+                    <i class="ph ph-recycle"></i>
+                    <h4>Waste, reimagined</h4>
+                    <p>Naturally strong shells, made useful again.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Banner -->
+    <div class="feature-banner">
+        <div class="container feature-banner-container">
+            <span>Sustainable material</span>
+            <span>Handmade character</span>
+            <span>Accessible everyday pricing</span>
+            <span>Reusable by design</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section section-padding">
+        <div class="container about-container">
+            <div class="about-image-wrapper">
+                <img src="bowl_spoon_1790782256949.jpg" alt="Pile of coconut shells" class="about-img-arch">
+            </div>
+            <div class="about-text">
+                <span class="eyebrow">ABOUT ECO-SHELL</span>
+                <h2 class="section-title">A useful second life for every shell.</h2>
+                <p class="section-copy">Our story starts with discarded coconut shells — a familiar agricultural by-product with warmth, texture and practical strength. We work to turn this overlooked material into useful kitchenware and fashion accessories that feel good to use every day.</p>
+                
+                <div class="mission-vision-cards">
+                    <div class="mv-card mv-card-white">
+                        <h3>Our mission</h3>
+                        <p>Make sustainable kitchenware and fashion accessories accessible and affordable while reducing coconut waste.</p>
+                    </div>
+                    <div class="mv-card mv-card-green">
+                        <h3>Our vision</h3>
+                        <p>A future where agricultural waste becomes valuable, beautiful, everyday products.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Why Coconut Shells -->
+        <div class="container why-coconut-section">
+            <h3 class="why-title">Why coconut shells?</h3>
+            <div class="why-pills">
+                <div class="why-pill">Strong natural material</div>
+                <div class="why-pill">Upcycled waste</div>
+                <div class="why-pill">Reusable for everyday rituals</div>
+                <div class="why-pill">Distinctive natural texture</div>
+                <div class="why-pill">A lower-waste alternative to disposable items</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Collection Gallery -->
+    <section id="collection" class="collection-section section-padding">
+        <div class="container">
+            <span class="eyebrow">THE COLLECTION</span>
+            <h2 class="section-title">Kitchenware and fashion accessories with a better beginning.</h2>
+            <p class="section-copy max-w-md">Illustrative product prices shown below are simple, affordable starting points for the ECO-SHELL collection.</p>
+        </div>
+        
+        <div class="container">
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be injected here by script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section (How We Make It) -->
+    <section id="process" class="process-section section-padding">
+        <div class="container">
+            <span class="eyebrow">HOW WE MAKE IT</span>
+            <h2 class="section-title">From shell to shelf, one<br>careful step at a time.</h2>
+            <p class="section-copy max-w-md">A simple making process preserves the material's natural character while preparing it for practical, everyday use.</p>
+            
+            <div class="timeline-container mt-2">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper pill-shape bg-dark-green text-white">
+                        <i class="ph ph-basket"></i>
+                    </div>
+                    <h4>Collect</h4>
+                    <p>Gather discarded shells for a new purpose.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-green text-white">
+                        <i class="ph ph-sparkle"></i>
+                    </div>
+                    <h4>Clean</h4>
+                    <p>Prepare each shell with care.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-brown text-white">
+                        <i class="ph ph-sun"></i>
+                    </div>
+                    <h4>Dry</h4>
+                    <p>Allow the natural material to dry fully.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-orange text-white">
+                        <i class="ph ph-scissors"></i>
+                    </div>
+                    <h4>Shape</h4>
+                    <p>Form each piece for its intended use.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-dark-green text-white">
+                        <i class="ph ph-hand-swipe-right"></i>
+                    </div>
+                    <h4>Sand</h4>
+                    <p>Smooth surfaces while keeping their character.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-green text-white">
+                        <i class="ph ph-package"></i>
+                    </div>
+                    <h4>Add Lid</h4>
+                    <p>Add practical details where needed.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-brown text-white">
+                        <i class="ph ph-check-circle"></i>
+                    </div>
+                    <h4>Finish & Test</h4>
+                    <p>Check the final piece for everyday readiness.</p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper circle-shape bg-orange text-white">
+                        <i class="ph ph-box-arrow-down"></i>
+                    </div>
+                    <h4>Package</h4>
+                    <p>Prepare it for its next home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Section -->
+    <section id="sustainability" class="sustainability-section section-padding">
+        <div class="container sustainability-container">
+            <div class="sus-text">
+                <span class="eyebrow text-orange">SUSTAINABILITY, PLAINLY</span>
+                <h2 class="section-title text-white">Making more of what<br>already exists.</h2>
+                <p class="section-copy text-white-muted">ECO-SHELL turns discarded coconut shell waste into useful, reusable, attractive products. By extending the life of this natural material through mindful production and durable everyday objects, we aim to make lower-waste choices feel practical and beautiful.</p>
+            </div>
+            <div class="sus-card-wrapper">
+                <div class="sus-card">
+                    <i class="ph ph-leaf"></i>
+                    <h4>We do not claim perfection. We simply believe a useful material deserves more than one life.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Shop -->
+    <section id="how-to-shop" class="how-to-shop-section section-padding">
+        <div class="container">
+            <span class="eyebrow">HOW TO SHOP</span>
+            <h2 class="section-title">A simple way to bring ECO-SHELL home.</h2>
+            
+            <div class="shop-steps">
+                <div class="step-pill">1. Browse</div>
+                <div class="step-pill">2. Select</div>
+                <div class="step-pill">3. Add to Cart</div>
+                <div class="step-pill">4. Checkout</div>
+                <div class="step-pill">5. Delivery</div>
+            </div>
+            
+            <p class="section-copy mt-2 max-w-md">Choose a product, set your quantity, and use the cart to review your order. Checkout is a safe demo flow for sharing order details — it does not process payment.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section-padding">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <span class="eyebrow">CONTACT US</span>
+                <h2 class="section-title">Let’s make everyday<br>choices count.</h2>
+                <p class="section-copy">Questions about an item, a custom idea, or your order? Send ECO-SHELL a message.</p>
+                
+                <ul class="contact-details">
+                    <li><strong>Email:</strong> akshayasarvesh5@gmail.com</li>
+                    <li><strong>Phone:</strong> 8148801805</li>
+                    <li><strong>Location:</strong> Tiruchirappalli</li>
+                    <li><strong>Instagram:</strong> _coco_shell</li>
+                    <li><strong>WhatsApp:</strong> 9344992969</li>
+                </ul>
+            </div>
+            
+            <div class="contact-form-wrapper">
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label>Name</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group half">
+                            <label>Email</label>
+                            <input type="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section section-padding">
+        <div class="container faq-container">
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section-title">A few helpful answers.</h2>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-btn">Are all ECO-SHELL pieces exactly the same? <i class="ph ph-plus"></i></button>
+                    <div class="faq-content"><p>No. Every coconut shell has its own grain, colour and curve, so natural variation is part of the character of each piece.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-btn">How should I care for coconut-shell products? <i class="ph ph-plus"></i></button>
+                    <div class="faq-content"><p>Please clean gently by hand and allow pieces to dry thoroughly. Confirm care guidance for your selected item before ordering.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-btn">Is customization available? <i class="ph ph-plus"></i></button>
+                    <div class="faq-content"><p>Customization may be possible for selected ideas. Please contact ECO-SHELL to confirm available options, timing and pricing.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-btn">How does ECO-SHELL approach sustainability? <i class="ph ph-plus"></i></button>
+                    <div class="faq-content"><p>We focus on giving discarded coconut shells a useful next life through reusable, practical products and mindful making.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-btn">How do delivery and returns work? <i class="ph ph-plus"></i></button>
+                    <div class="faq-content"><p>Delivery and returns details should be confirmed directly with ECO-SHELL before ordering, as policies may vary by location and item.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="future-section section-padding">
+        <div class="container future-container">
+            <div class="future-image-wrapper">
+                <img src="shell_necklace_1790782270867.jpg" alt="Coming soon items" class="rounded-lg">
+            </div>
+            <div class="future-text">
+                <span class="eyebrow text-orange">COMING SOON IDEAS</span>
+                <h2 class="section-title">More ways to make the most of<br>every shell.</h2>
+                <p class="section-copy">We are exploring future additions that build naturally on the ECO-SHELL material story.</p>
+                <p class="future-list"><strong>Bowls • Serving trays • Spice organizers • Spoon holders • Planters • Coasters • Customized gift sets</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Large Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2 class="footer-logo">ECO-SHELL</h2>
+                <p class="footer-desc">ECO-SHELL gives discarded coconut shells a useful, reusable place as everyday kitchenware and fashion accessories.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick links</h4>
+                <ul>
+                    <li><a href="#collection">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Stay in the loop</h4>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                    <input type="email" placeholder="Email address" required>
+                    <button type="submit" class="btn-white-pill">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 ECO-SHELL. Thoughtful kitchenware and fashion accessories, naturally renewed.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your cart</h3>
+            <button class="close-btn" id="close-cart-btn"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- JS Injection -->
+            <div class="empty-cart-message">
+                <p>Your cart is empty. Explore the collection to find a useful new favourite.</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <button class="btn btn-primary w-100 checkout-btn" id="whatsapp-checkout-btn"><i class="ph ph-whatsapp-logo"></i> Order via WhatsApp</button>
+            <button class="btn btn-outline-grey w-100 mt-2" id="continue-shopping">Continue browsing</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

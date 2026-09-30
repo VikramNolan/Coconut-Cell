@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECO-SHELL | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #f9f9f9; font-family: 'Inter', sans-serif; padding: 40px 20px; }
+        .admin-container { max-width: 800px; margin: 0 auto; }
+        .admin-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .admin-card h2 { margin-bottom: 20px; font-family: var(--font-heading); color: var(--text-dark); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+        .product-list { display: flex; flex-direction: column; gap: 15px; }
+        .product-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #eee; border-radius: 8px; }
+        .product-item h4 { margin: 0; font-size: 1rem; }
+        .product-item input { width: 80px; padding: 8px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        #dashboard-panel { display: none; }
+        .btn-sm { padding: 8px 15px; font-size: 0.8rem; background: var(--text-dark); color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .img-preview { max-width: 100px; max-height: 100px; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Login Panel -->
+        <div class="admin-card" id="login-panel" style="max-width: 400px; margin: 100px auto;">
+            <h2 style="text-align:center;">Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>User ID</label>
+                    <input type="text" id="admin-id" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="admin-pass" placeholder="admin123" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <p id="login-error" style="color:red; font-size:0.8rem; margin-top:10px; display:none;">Invalid credentials.</p>
+            </form>
+            <div style="text-align:center; margin-top:15px;"><a href="index.html">Return to Store</a></div>
+        </div>
+
+        <!-- Dashboard Panel -->
+        <div id="dashboard-panel">
+            <div class="header-flex">
+                <h2>Admin Dashboard</h2>
+                <a href="index.html" class="btn btn-outline-grey">View Store</a>
+            </div>
+
+            <div class="admin-card">
+                <h3>Manage Products & Prices</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Update the prices of your existing products here.</p>
+                <div class="product-list" id="admin-product-list">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <h3>Add New Product</h3>
+                <form id="add-product-form">
+                    <div class="form-group">
+                        <label>Product Title</label>
+                        <input type="text" id="prod-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="prod-desc" rows="2" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (₹)</label>
+                        <input type="number" id="prod-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <input type="file" id="prod-image-file" accept="image/*" required>
+                        <img id="img-preview" class="img-preview">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultProducts = [
+            { id: '1', title: 'Spice Containers', price: 100 },
+            { id: '2', title: 'Snack Containers', price: 50 },
+            { id: '3', title: 'Dry Fruit Containers', price: 60 },
+            { id: '4', title: 'Plates', price: 50 },
+            { id: '5', title: 'Cups & Mugs', price: 80 }
+        ];
+
+        let base64Image = '';
+
+        // Login Logic
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('admin-id').value;
+            const pass = document.getElementById('admin-pass').value;
+            if(id === 'admin' && pass === 'admin123') {
+                document.getElementById('login-panel').style.display = 'none';
+                document.getElementById('dashboard-panel').style.display = 'block';
+                renderAdminProducts();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        });
+
+        // Render Products
+        function renderAdminProducts() {
+            const list = document.getElementById('admin-product-list');
+            list.innerHTML = '';
+            
+            const storedProducts = JSON.parse(localStorage.getItem('customProducts')) || [];
+            const deletedProducts = JSON.parse(localStorage.getItem('deletedProducts')) || [];
+            let allProducts = [...defaultProducts, ...storedProducts];
+            allProducts = allProducts.filter(p => !deletedProducts.includes(p.id));
+            
+            const priceOverrides = JSON.parse(localStorage.getItem('priceOverrides')) || {};
+
+            allProducts.forEach(p => {
+                const currentPrice = priceOverrides[p.id] || p.price;
+                const div = document.createElement('div');
+                div.className = 'product-item';
+                div.innerHTML = `
+                    <div>
+                        <h4>${p.title}</h4>
+                        <span style="font-size:0.8rem; color:#888;">ID: ${p.id}</span>
+                    </div>
+                    <div>
+                        <input type="number" id="price-input-${p.id}" value="${currentPrice}" title="Update price">
+                        <button class="btn-sm" onclick="updatePrice('${p.id}')">Save</button>
+                        <button class="btn-sm" style="background:#e74c3c; margin-left:5px;" onclick="deleteProduct('${p.id}')">Delete</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        // Delete Product
+        window.deleteProduct = function(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                const deletedProducts = JSON.parse(localStorage.getItem('deletedProducts')) || [];
+                if (!deletedProducts.includes(id)) {
+                    deletedProducts.push(id);
+                    localStorage.setItem('deletedProducts', JSON.stringify(deletedProducts));
+                }
+                alert('Product deleted successfully!');
+                renderAdminProducts();
+            }
+        };
+
+        // Update Price
+        window.updatePrice = function(id) {
+            const newPrice = document.getElementById('price-input-' + id).value;
+            const priceOverrides = JSON.parse(localStorage.getItem('priceOverrides')) || {};
+            priceOverrides[id] = parseInt(newPrice, 10);
+            localStorage.setItem('priceOverrides', JSON.stringify(priceOverrides));
+            alert('Price updated successfully! It will now show on the store.');
+        };
+
+        // Handle Image Upload to Base64 with compression
+        document.getElementById('prod-image-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(readerEvent) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 600;
+                        const MAX_HEIGHT = 600;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        base64Image = canvas.toDataURL('image/jpeg', 0.7); // Compress to 70% quality JPEG
+                        
+                        const preview = document.getElementById('img-preview');
+                        preview.src = base64Image;
+                        preview.style.display = 'block';
+                    };
+                    img.src = readerEvent.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add Product
+        document.getElementById('add-product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!base64Image) {
+                alert('Please select an image first.');
+                return;
+            }
+
+            const newProduct = {
+                id: 'custom_' + Date.now(),
+                title: document.getElementById('prod-title').value,
+                desc: document.getElementById('prod-desc').value,
+                price: parseInt(document.getElementById('prod-price').value, 10),
+                image: base64Image
+            };
+
+            const storedProducts = JSON.parse(localStorage.getItem('customProducts')) || [];
+            storedProducts.push(newProduct);
+            localStorage.setItem('customProducts', JSON.stringify(storedProducts));
+
+            alert('Product added successfully!');
+            document.getElementById('add-product-form').reset();
+            document.getElementById('img-preview').style.display = 'none';
+            base64Image = '';
+            renderAdminProducts();
+        });
+    </script>
+</body>
+</html>
